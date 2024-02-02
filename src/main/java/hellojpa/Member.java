@@ -13,27 +13,10 @@ import java.util.Date;
 public class Member {
 
     @Id
-    private Long id;
+    private String id;
 
     @Column(name = "name", nullable = false)
     private String userName;
-
-    private int age;
-
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
-
-    private LocalDate testLocalDate;
-    private LocalDateTime testLocalDateTime;
-
-    @Lob
-    private String description;
 
     protected Member() {
     }
