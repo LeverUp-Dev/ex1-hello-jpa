@@ -2,12 +2,18 @@ package hellojpa;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Table(name = "MBR")
 @Getter @Setter
 public class Member {
+
+    @Id
+    private Long id;
+    private String name;
 
     protected Member() {
     }
@@ -16,8 +22,4 @@ public class Member {
         this.id = id;
         this.name = name;
     }
-
-    @Id
-    private Long id;
-    private String name;
 }
