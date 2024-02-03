@@ -13,10 +13,26 @@ public class JpaMain {
 
         try {
 
-            Member member = new Member();
-            member.setUserName("A");
+            Member member1 = new Member();
+            member1.setUserName("A");
 
-            em.persist(member);
+            Member member2 = new Member();
+            member2.setUserName("B");
+
+            Member member3 = new Member();
+            member3.setUserName("C");
+
+            System.out.println("===================");
+
+            em.persist(member1);
+            em.persist(member2);
+            em.persist(member3);
+
+            System.out.println("member1.id = " + member1.getId());
+            System.out.println("member2.id = " + member2.getId());
+            System.out.println("member3.id = " + member3.getId());
+
+            System.out.println("===================");
 
             tx.commit();
         } catch (Exception e) {
