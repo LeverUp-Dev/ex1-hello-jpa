@@ -5,21 +5,20 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@SequenceGenerator(
-        name = "MEMBER_SEQ_GENERATOR",
-        sequenceName = "MEMBER_SEQ",
-        initialValue = 1, allocationSize = 50)
 @Getter @Setter
 public class Member {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEMBER_SEQ_GENERATOR")
+    @Id @GeneratedValue
+    @Column(name = "MEMBER_ID")
     private Long id;
 
-    @Column(name = "name", nullable = false)
-    private String userName;
+    @Column(name = "USERNAME")
+    private String name;
 
-    public Member() {
-    }
+//    @Column(name = "TEAM_ID")
+//    private Long teamId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
 }
