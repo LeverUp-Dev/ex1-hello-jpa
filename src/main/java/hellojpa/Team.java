@@ -18,18 +18,4 @@ public class Team {
 
     @OneToMany(mappedBy = "team")
     private List<Member> members = new ArrayList<>();
-
-    public void addMember(Member member) {
-        member.setTeam(this);
-        members.add(member);
-    }
-
-    @Override
-    public String toString() {
-        return "Team{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", members=" + members +
-                '}';
-    }
 }
