@@ -2,9 +2,6 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 public class JpaMain {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
@@ -16,17 +13,11 @@ public class JpaMain {
 
         try {
 
-            Member member = new Member();
-            member.setName("user1");
-            member.setCreateBy("Song Do-young");
-            member.setCreatedDate(LocalDateTime.now());
+            Member member = em.find(Member.class, 1L);
 
-            em.persist(member);
+            printMember(member);
 
-            em.flush();
-            em.clear();
-
-            //em.find(BaseEntity.class, member); @MappedSuperclass 클래스는 조회시 오류 발생
+//            printMemberAndTeam(member);
 
             tx.commit();
         } catch (Exception e) {
@@ -36,5 +27,17 @@ public class JpaMain {
         }
 
         emf.close();
+    }
+
+    private static void printMember(Member member) {
+        System.out.println("member = " + member.getUsername());
+    }
+
+    private static void printMemberAndTeam(Member member) {
+        String username = member.getUsername();
+        System.out.println("name = " + username);
+
+        Team team = member.getTeam();
+        System.out.println("team = " + team.getName());
     }
 }
