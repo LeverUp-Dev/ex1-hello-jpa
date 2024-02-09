@@ -1,6 +1,7 @@
 package hellojpa;
 
 import jakarta.persistence.*;
+import org.hibernate.Hibernate;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -22,11 +23,7 @@ public class JpaMain {
 
             Member refMember = em.getReference(Member.class, member1.getId());
             System.out.println("refMember = " + refMember.getClass());//Proxy
-
-//            em.detach(refMember);
-            em.clear();
-
-            System.out.println(refMember.getUsername());
+            Hibernate.initialize(refMember); //강제 초기화
 
             tx.commit();
         } catch (Exception e) {
