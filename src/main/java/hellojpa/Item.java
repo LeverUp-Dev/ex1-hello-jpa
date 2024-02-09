@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Entity
 @Setter @Getter
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "ITEM_TYPE")
 public class Item {
 
