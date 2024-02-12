@@ -3,6 +3,8 @@ package hellojpa;
 import jakarta.persistence.*;
 import org.hibernate.Hibernate;
 
+import java.util.List;
+
 public class JpaMain {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
@@ -26,13 +28,12 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            Member m = em.find(Member.class, member1.getId());
+//            Member m = em.find(Member.class, member1.getId());
 
-            System.out.println("m = " + m.getTeam().getClass());
+            List<Member> members = em.createQuery("select m from Member m", Member.class)
+                            .getResultList();
 
-            System.out.println("===============");
-            System.out.println(m.getTeam().getName());
-            System.out.println("===============");
+
 
             tx.commit();
         } catch (Exception e) {
