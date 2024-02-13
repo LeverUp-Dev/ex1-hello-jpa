@@ -30,9 +30,7 @@ public class JpaMain {
             member2.setHomeAddress(copyAddress);
             em.persist(member2);
 
-            //
-
-            member1.getHomeAddress().setCity("newCity");
+            //member1.getHomeAddress().setCity("newCity");
 
             tx.commit();
         } catch (Exception e) {
