@@ -4,9 +4,14 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Getter @Setter
-public class Member extends BaseEntity {
+public class Member {
 
     @Id @GeneratedValue
     @Column(name = "MEMBER_ID")
@@ -15,12 +20,22 @@ public class Member extends BaseEntity {
     @Column(name = "USERNAME")
     private String username;
 
-    //기간
-    @Embedded
-    private Period workPeriod;
-
-    //집 주소
     @Embedded
     private Address homeAddress;
+
+    // 매핑 작업
+    @ElementCollection
+    @CollectionTable(name = "FAVORITE_FOOD", joinColumns =
+            @JoinColumn(name = "MEMBER_ID")
+    )
+    @Column(name = "FOOD_NAME")
+    private Set<String> favoriteFoods = new HashSet<>();
+
+    // 매핑 작업
+    @ElementCollection
+    @CollectionTable(name = "ADDRESS", joinColumns =
+            @JoinColumn(name = "MEMBER_ID")
+    )
+    private List<Address> addressHistory = new ArrayList<>();
 
 }
