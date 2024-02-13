@@ -34,10 +34,18 @@ public class JpaMain {
             System.out.println("------------------------------------");
             Member findMember = em.find(Member.class, member.getId());
 
-            List<Address> addressHistory = findMember.getAddressHistory();
-            for (Address address : addressHistory) {
-                System.out.println("adress = " + address.getCity());
-            }
+            //목표: homeCity -> newCity
+//            findMember.getHomeAddress().setCity("newCity"); 잘못된 예시
+            Address a = findMember.getHomeAddress();
+            findMember.setHomeAddress(new Address("newCity", a.getStreet(), a.getZipcode()));
+
+            //목표: 치킨 -> 한식
+            findMember.getFavoriteFoods().remove("치킨");
+            findMember.getFavoriteFoods().add("한식");
+
+            findMember.getAddressHistory().remove(new Address("old1", "street", "10000"));
+            findMember.getAddressHistory().add(new Address("newCity1", "street", "10000"));
+
             System.out.println("------------------------------------");
 
             tx.commit();
